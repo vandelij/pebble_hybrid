@@ -1,7 +1,13 @@
 # pebble dimensions: TRISO radius of 2.5cm, pebble radius of 3cm
 # Key parameters: T_b, t_res, r_p, S,
 
-
+#To upload:
+#git add .
+#git status
+#git commit -m "insert message"
+#git push
+#To pull:
+#git pull
 
 # GRAPHITE:
 #         Author: Petucci
