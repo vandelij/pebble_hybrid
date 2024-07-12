@@ -1,9 +1,9 @@
 import h_transport_materials as htm
 
 D = (
-    htm.diffusivities.filter(material="carbon")
-    .filter(isotope="h")
-    .filter(author="causey")[0]
+    htm.solubilities.filter(material="lipb")
+    .filter(isotope="d")
+    .filter(author="okada")[0]
 )
 print(D)
 
