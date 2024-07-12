@@ -8,6 +8,8 @@
 #git push
 #To pull:
 #git pull
+#to go to a new branch:
+#git checkout new_branch
 
 # GRAPHITE:
 #         Author: Petucci
@@ -86,9 +88,9 @@ my_model.T = F.Temperature(value=T_b)
 # trap_3 = F.Trap(
 #     k_0=graphite.D_0 / (1.1e-10**2 * 6 * g_atom_density),
 #     E_k=graphite.E_D,
-#     p_0=1e7,
-#     E_p=1.6,
-#     density=4e-9*g_atom_density,
+#     p_0=1e5,
+#     E_p=1.3,
+#     density=9e-9*g_atom_density,
 #     materials=graphite,
 # )
 
@@ -121,53 +123,53 @@ data = np.genfromtxt(
     results_folder + "/mobile_concentration.txt", skip_header=1, delimiter=","
 )
 
-plt.ylim(0, 5e24)
-plt.plot(data[:, 0], data[:, 50], label="1.0 s")
-plt.plot(data[:, 0], data[:, 40], label="0.5 s")
-plt.plot(data[:, 0], data[:, 30], label="0.2 s")
-plt.plot(data[:, 0], data[:, 20], label="0.1 s")
-plt.xlabel("x (m)")
-plt.ylabel("Mobile concentration (H/m3)")
-plt.show()
+# plt.ylim(0, 5e24)
+# plt.plot(data[:, 0], data[:, 50], label="1.0 s")
+# plt.plot(data[:, 0], data[:, 40], label="0.5 s")
+# plt.plot(data[:, 0], data[:, 30], label="0.2 s")
+# plt.plot(data[:, 0], data[:, 20], label="0.1 s")
+# plt.xlabel("x (m)")
+# plt.ylabel("Mobile concentration (H/m3)")
+# plt.show()
 
 ####
-# import numpy as np
-# import matplotlib.pyplot as plt
-# import matplotlib.animation as animation
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.animation as animation
 
-# # Load the simulation results from the TXT file
-# data = np.genfromtxt(results_folder + "/mobile_concentration.txt", skip_header=1, delimiter=",")
+# Load the simulation results from the TXT file
+data = np.genfromtxt(results_folder + "/mobile_concentration.txt", skip_header=1, delimiter=",")
 
-# # Check the shape of the data to avoid index errors
-# num_frames = data.shape[1] - 1  # Number of datasets excluding the first column
+# Check the shape of the data to avoid index errors
+num_frames = data.shape[1] - 1  # Number of datasets excluding the first column
 
-# # Set up the figure and axis
-# fig, ax = plt.subplots()
-# heatmap = ax.imshow(data[:, 1].reshape(1, -1), aspect = 'auto', cmap='jet', origin='lower',interpolation='nearest')
-# border = plt.axvline(x=1000, linewidth = 3, color='black')
+# Set up the figure and axis
+fig, ax = plt.subplots()
+heatmap = ax.imshow(data[:, 1].reshape(1, -1), aspect = 'auto', cmap='jet', origin='lower',interpolation='nearest')
+border = plt.axvline(x=1000, linewidth = 3, color='black')
 
-# # Add color bar
-# cbar = plt.colorbar(heatmap)
-# cbar.set_label('Concentration (H/m³)')
-# border1 = plt.axvline(x=1714, linewidth = 3, color='black')
-# border2 = plt.axvline(x=1429, linewidth = 3, color='black')
+# Add color bar
+cbar = plt.colorbar(heatmap)
+cbar.set_label('Concentration (H/m³)')
+border1 = plt.axvline(x=1714, linewidth = 3, color='black')
+border2 = plt.axvline(x=1429, linewidth = 3, color='black')
 
-# # Update function for animation
-# def update(frame):
-#     if frame < num_frames:
-#         # Update the heatmap data with the next dataset
-#         heatmap.set_array(data[:, frame + 1].reshape(1, -1))
-#         return [heatmap, border1, border2]
+# Update function for animation
+def update(frame):
+    if frame < num_frames:
+        # Update the heatmap data with the next dataset
+        heatmap.set_array(data[:, frame + 1].reshape(1, -1))
+        return [heatmap, border1, border2]
     
 
 
-# # Create the animation
-# ani = animation.FuncAnimation(fig, update, frames=num_frames, interval=500, blit=True)
-# writer = animation.PillowWriter(fps=5)
-# ani.save('animation.gif', writer=writer)
+# Create the animation
+ani = animation.FuncAnimation(fig, update, frames=num_frames, interval=500, blit=True)
+writer = animation.PillowWriter(fps=5)
+ani.save('animation.wmv', writer=writer)
 
-# # Display the animation
-# plt.show()
+# Display the animation
+plt.show()
 
 
 
