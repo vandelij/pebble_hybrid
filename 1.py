@@ -1,6 +1,10 @@
 # pebble dimensions: TRISO radius of 2.5cm, pebble radius of 3cm
 # Key parameters: T_b, t_res, r_p, S,
 
+# 1. determine marble density
+# 2. figure out what material is needed
+
+
 #To upload:
 #git add .
 #git status
@@ -37,7 +41,7 @@ t_res = 1000#s
 r_p = 3e-2 #m
 S = 1e22
 g_atom_density = 1.1e29
-P = 2 + F.t
+P = 1e22
 
 size = 3.5e-2
 t = np.arange(0,t_res,10)
@@ -70,13 +74,13 @@ my_model.T = F.Temperature(value=T_b)
 
 my_model.boundary_conditions = [
     F.SievertsBC(
-        surfaces=1, 
+        surfaces=2, 
         S_0=5.73e22, 
         E_S=-1.89e-01, 
         pressure=P
         ) , 
     F.SievertsBC(
-        surfaces=2, 
+        surfaces=1, 
         S_0=5.30e22, 
         E_S=5.95e-01, 
         pressure=P
@@ -117,7 +121,7 @@ my_model.sources = [F.Source(value=S, volume=2, field=0)]
 my_model.settings = F.Settings(
     absolute_tolerance=1e10,
     relative_tolerance=1e-10,
-    final_time=500  # s
+    final_time=1000  # s
     )
 my_model.dt = F.Stepsize(2)  # s
 results_folder = "task01"
@@ -139,53 +143,53 @@ data = np.genfromtxt(
     results_folder + "/mobile_concentration.txt", skip_header=1, delimiter=","
 )
 
-plt.ylim(0, 5e24)
-plt.plot(data[:, 0], data[:, 50], label="1.0 s")
-plt.plot(data[:, 0], data[:, 40], label="0.5 s")
-plt.plot(data[:, 0], data[:, 30], label="0.2 s")
-plt.plot(data[:, 0], data[:, 20], label="0.1 s")
-plt.xlabel("x (m)")
-plt.ylabel("Mobile concentration (H/m3)")
-plt.show()
+# plt.ylim(0, 5e24)
+# plt.plot(data[:, 0], data[:, 50], label="1.0 s")
+# plt.plot(data[:, 0], data[:, 40], label="0.5 s")
+# plt.plot(data[:, 0], data[:, 30], label="0.2 s")
+# plt.plot(data[:, 0], data[:, 20], label="0.1 s")
+# plt.xlabel("x (m)")
+# plt.ylabel("Mobile concentration (H/m3)")
+# plt.show()
 
 ####
-# import numpy as np
-# import matplotlib.pyplot as plt
-# import matplotlib.animation as animation
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.animation as animation
 
-# # Load the simulation results from the TXT file
-# data = np.genfromtxt(results_folder + "/mobile_concentration.txt", skip_header=1, delimiter=",")
+# Load the simulation results from the TXT file
+data = np.genfromtxt(results_folder + "/mobile_concentration.txt", skip_header=1, delimiter=",")
 
-# # Check the shape of the data to avoid index errors
-# num_frames = data.shape[1] - 1  # Number of datasets excluding the first column
+# Check the shape of the data to avoid index errors
+num_frames = data.shape[1] - 1  # Number of datasets excluding the first column
 
-# # Set up the figure and axis
-# fig, ax = plt.subplots()
-# heatmap = ax.imshow(data[:, 1].reshape(1, -1), aspect = 'auto', cmap='jet', origin='lower',interpolation='nearest')
-# border = plt.axvline(x=1000, linewidth = 3, color='black')
+# Set up the figure and axis
+fig, ax = plt.subplots()
+heatmap = ax.imshow(data[:, 1].reshape(1, -1), aspect = 'auto', cmap='jet', origin='lower',interpolation='nearest')
+border = plt.axvline(x=1000, linewidth = 3, color='black')
 
-# # Add color bar
-# cbar = plt.colorbar(heatmap)
-# cbar.set_label('Concentration (H/m³)')
-# border1 = plt.axvline(x=1714, linewidth = 3, color='black')
-# border2 = plt.axvline(x=1429, linewidth = 3, color='black')
+# Add color bar
+cbar = plt.colorbar(heatmap)
+cbar.set_label('Concentration (H/m³)')
+border1 = plt.axvline(x=1714, linewidth = 3, color='black')
+border2 = plt.axvline(x=1429, linewidth = 3, color='black')
 
-# # Update function for animation
-# def update(frame):
-#     if frame < num_frames:
-#         # Update the heatmap data with the next dataset
-#         heatmap.set_array(data[:, frame + 1].reshape(1, -1))
-#         return [heatmap, border1, border2]
+# Update function for animation
+def update(frame):
+    if frame < num_frames:
+        # Update the heatmap data with the next dataset
+        heatmap.set_array(data[:, frame + 1].reshape(1, -1))
+        return [heatmap, border1, border2]
     
 
 
-# # Create the animation
-# ani = animation.FuncAnimation(fig, update, frames=num_frames, interval=500, blit=True)
-# writer = animation.PillowWriter(fps=5)
-# ani.save('animation.gif', writer=writer)
+# Create the animation
+ani = animation.FuncAnimation(fig, update, frames=num_frames, interval=100, blit=True)
+writer = animation.PillowWriter(fps=5)
+ani.save('animation.gif', writer=writer)
 
-# # Display the animation
-# plt.show()
+# Display the animation
+plt.show()
 
 
 
