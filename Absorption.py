@@ -1,36 +1,3 @@
-# pebble dimensions: TRISO radius of 2.5cm, pebble radius of 3cm
-# Key parameters: T_b, t_res, r_p, S,
-
-# 1. determine marble density
-# 2. figure out what material is needed
-
-
-#To upload:
-#git add .
-#git status
-#git commit -m "insert message"
-#git push
-#To pull:
-#git pull
-#to go to a new branch:
-#git checkout new_branch
-
-# GRAPHITE:
-#         Author: Petucci
-#         Material: carbon
-#         Year: 2013
-#         Isotope: H
-#         Pre-exponential factor: 1.16×10⁻⁶ m²/s
-#         Activation energy: 3.51×10⁻² eV/particle
-
-# LIPB:
-#         Author: Edao
-#         Material: lipb
-#         Year: 2011
-#         Isotope: H
-#         Pre-exponential factor: 7.88×10⁻⁸ m²/s
-#         Activation energy: 1.64×10⁻¹ eV/particle
-
 import festim as F
 my_model = F.Simulation()
 import numpy as np
@@ -72,18 +39,22 @@ my_model.T = F.Temperature(value=T_b)
 #         )
 # ]
 
+# my_model.boundary_conditions = [
+#     F.DirichletBC(surfaces=[1, 2], value=0, field=0)
+# ]
+
 my_model.boundary_conditions = [
     F.SievertsBC(
-        surfaces=1, 
+        surfaces=0, 
         S_0=5.73e22, 
         E_S=-1.89e-01, 
-        pressure=P
+        pressure=P,
         ) , 
     F.SievertsBC(
-        surfaces=2, 
+        surfaces=1, 
         S_0=5.30e22, 
         E_S=5.95e-01, 
-        pressure=P
+        pressure=P,
         )
 ]
 
@@ -190,3 +161,32 @@ plt.show()
 
 # # Display the animation
 # plt.show()
+
+# pebble dimensions: TRISO radius of 2.5cm, pebble radius of 3cm
+# Key parameters: T_b, t_res, r_p, S,
+
+#To upload:
+#git add .
+#git status
+#git commit -m "insert message"
+#git push
+#To pull:
+#git pull
+#to go to a new branch:
+#git checkout new_branch
+
+# GRAPHITE:
+#         Author: Petucci
+#         Material: carbon
+#         Year: 2013
+#         Isotope: H
+#         Pre-exponential factor: 1.16×10⁻⁶ m²/s
+#         Activation energy: 3.51×10⁻² eV/particle
+
+# LIPB:
+#         Author: Edao
+#         Material: lipb
+#         Year: 2011
+#         Isotope: H
+#         Pre-exponential factor: 7.88×10⁻⁸ m²/s
+#         Activation energy: 1.64×10⁻¹ eV/particle
