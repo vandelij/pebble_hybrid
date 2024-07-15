@@ -8,18 +8,22 @@ t_res = 1000#s
 r_p = 3e-2#m
 S = 1.715e17
 g_atom_density = 1.1e29
-P = 1e9
+Cinf = 1e23 #concentration at infinity
 
 size = 3.5e-2
 t = np.arange(0,t_res,10)
 x = np.arange(0,size,size/100)
-my_model.mesh = F.MeshFromVertices(np.linspace(0, size, num=1001), type = 'spherical')
+vertices_g = np.linspace(0,r_p, num = 100)
+vertices_lipb = np.linspace(r_p,size, num = 100)
+vertices = np.concatenate([vertices_g, vertices_lipb])
+my_model.mesh = F.MeshFromVertices(vertices, type = 'spherical')
 
 graphite = F.Material(
     id=1,
     D_0= 1.16e-6,
     E_D= 3.51e-2,
     borders=[0, r_p],
+    solubility_law= "henry"
 )
 lipb = F.Material(
     id=2,
@@ -39,24 +43,24 @@ my_model.T = F.Temperature(value=T_b)
 #         )
 # ]
 
-# my_model.boundary_conditions = [
-#     F.DirichletBC(surfaces=[1, 2], value=0, field=0)
-# ]
-
 my_model.boundary_conditions = [
-    F.SievertsBC(
-        surfaces=1, 
-        S_0=5.73e22, 
-        E_S=-1.89e-01, 
-        pressure=P*(10**F.t),
-        ) , 
-    F.SievertsBC(
-        surfaces=2, 
-        S_0=5.30e22,
-        E_S=5.95e-01, 
-        pressure=P*(10**F.t),
-        )
+    F.DirichletBC(surfaces=2, value=Cinf, field=0)
 ]
+
+# my_model.boundary_conditions = [
+#     # F.SievertsBC(
+#         # surfaces=1, 
+#         # S_0=5.73e22, 
+#         # E_S=-1.89e-01, 
+#         # pressure=P,
+#         # ) , 
+#     F.SievertsBC(
+#         surfaces=2, 
+#         S_0=5.30e22,
+#         E_S=5.95e-01, 
+#         pressure=P,
+#         )
+# ]
 
 # trap_1 = F.Trap(
 #     k_0=graphite.D_0 / (1.1e-10**2 * 6 * g_atom_density),
@@ -115,10 +119,10 @@ data = np.genfromtxt(
 )
 
 
-plt.plot(data[:, 0], data[:, 50], label="1.0 s")
-plt.plot(data[:, 0], data[:, 40], label="0.5 s")
-plt.plot(data[:, 0], data[:, 30], label="0.2 s")
-plt.plot(data[:, 0], data[:, 20], label="0.1 s")
+plt.plot(data[:, 0], data[:, 50], label="1.0 s", marker = '.')
+plt.plot(data[:, 0], data[:, 40], label="0.5 s", marker = '.')
+plt.plot(data[:, 0], data[:, 30], label="0.2 s", marker = '.')
+plt.plot(data[:, 0], data[:, 20], label="0.1 s", marker = '.')
 plt.xlabel("x (m)")
 plt.ylabel("Mobile concentration (H/m3)")
 plt.show()
