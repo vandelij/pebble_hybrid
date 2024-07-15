@@ -23,7 +23,6 @@ graphite = F.Material(
     D_0= 1.16e-6,
     E_D= 3.51e-2,
     borders=[0, r_p],
-    solubility_law= "henry"
 )
 lipb = F.Material(
     id=2,
