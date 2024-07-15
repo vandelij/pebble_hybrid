@@ -5,7 +5,7 @@ import sympy as sp
 from festim import x,y,z,t
 T_b = 975#K
 t_res = 1000#s
-r_p = 3e-2 #m
+r_p = 3e-2#m
 S = 1.715e17
 g_atom_density = 1.1e29
 P = 1e9
@@ -45,16 +45,16 @@ my_model.T = F.Temperature(value=T_b)
 
 my_model.boundary_conditions = [
     F.SievertsBC(
-        surfaces=0, 
+        surfaces=1, 
         S_0=5.73e22, 
         E_S=-1.89e-01, 
-        pressure=P,
+        pressure=P*(10**F.t),
         ) , 
     F.SievertsBC(
-        surfaces=1, 
-        S_0=5.30e22, 
+        surfaces=2, 
+        S_0=5.30e22,
         E_S=5.95e-01, 
-        pressure=P,
+        pressure=P*(10**F.t),
         )
 ]
 
@@ -92,7 +92,7 @@ my_model.sources = [F.Source(value=S, volume=2, field=0)]
 my_model.settings = F.Settings(
     absolute_tolerance=1e10,
     relative_tolerance=1e-10,
-    final_time=900 # s
+    final_time=500 # s
     )
 my_model.dt = F.Stepsize(2)  # s
 results_folder = "task01"
