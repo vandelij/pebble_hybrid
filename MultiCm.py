@@ -4,6 +4,10 @@
 # - hint: f'cm{xxx}'
 # - implement zero diffusion flux boundary condition (3D geometry thing)
 # - match Cinf (point where local minima asymptotes) from 0-flux BC to other Cinf
+# - Oven ramp: 900 - 1700 K
+# - Multistage heating oven(?)
+# - Email Prof Shirvan for oven heating range
+# - 
 
 
 import festim as F
@@ -17,9 +21,9 @@ r_p = 3e-2#m
 S = 1.715e17
 g_atom_density = 1.1e29
 for h in range(17,24):
-    Cm = 10**h #concentration at infinity
+    Cm = "{:e}".format(10**h) #concentration at infinity
 
-    size = 3.5e-2
+    size = np.sqrt(3)*r_p
     t = np.arange(0,t_res,10)
     x = np.arange(0,size,size/100)
     vertices_g = np.linspace(0,r_p, num = 100)
@@ -126,19 +130,101 @@ for h in range(17,24):
     my_model.run()
 import matplotlib.pyplot as plt
 import numpy as np
-
-data = np.genfromtxt(
-    results_folder + f'/Cm{np.log10(float(Cm))}.txt', skip_header=1, delimiter=","
+import festim as F
+import numpy as np
+import sympy as sp
+from festim import x,y,z,t
+my_model = F.Simulation()
+results_folder = "Cm measurements"
+data17 = np.genfromtxt(
+    results_folder + f'/Cm17.0.txt', skip_header=1, delimiter=","
+)
+data18 = np.genfromtxt(
+    results_folder + f'/Cm18.0.txt', skip_header=1, delimiter=","
+)
+data19 = np.genfromtxt(
+    results_folder + f'/Cm19.0.txt', skip_header=1, delimiter=","
+)
+data20 = np.genfromtxt(
+    results_folder + f'/Cm20.0.txt', skip_header=1, delimiter=","
+)
+data21 = np.genfromtxt(
+    results_folder + f'/Cm21.0.txt', skip_header=1, delimiter=","
+)
+data22 = np.genfromtxt(
+    results_folder + f'/Cm22.0.txt', skip_header=1, delimiter=","
+)
+data23 = np.genfromtxt(
+    results_folder + f'/Cm23.0.txt', skip_header=1, delimiter=","
 )
 
+fig, axs = plt.subplots(3, 3)
+axs[0, 0].plot(data17[:, 0], data17[:, 50])
+axs[0, 0].plot(data17[:, 0], data17[:, 40])
+axs[0, 0].plot(data17[:, 0], data17[:, 30])
+axs[0, 0].plot(data17[:, 0], data17[:, 20])
+axs[0, 0].set_title('17')
+axs[0, 1].plot(data18[:, 0], data18[:, 50])
+axs[0, 1].plot(data18[:, 0], data18[:, 40])
+axs[0, 1].plot(data18[:, 0], data18[:, 30])
+axs[0, 1].plot(data18[:, 0], data18[:, 20])
+axs[0, 1].set_title('18')
+axs[0, 2].plot(data19[:, 0], data19[:, 50])
+axs[0, 2].plot(data19[:, 0], data19[:, 40])
+axs[0, 2].plot(data19[:, 0], data19[:, 30])
+axs[0, 2].plot(data19[:, 0], data19[:, 20])
+axs[0, 2].set_title('19')
+axs[1, 0].plot(data20[:, 0], data20[:, 50])
+axs[1, 0].plot(data20[:, 0], data20[:, 40])
+axs[1, 0].plot(data20[:, 0], data20[:, 30])
+axs[1, 0].plot(data20[:, 0], data20[:, 20])
+axs[1, 0].set_title('20')
+axs[1, 1].plot(data21[:, 0], data21[:, 50])
+axs[1, 1].plot(data21[:, 0], data21[:, 40])
+axs[1, 1].plot(data21[:, 0], data21[:, 30])
+axs[1, 1].plot(data21[:, 0], data21[:, 20])
+axs[1, 1].set_title('21')
+axs[1, 2].plot(data22[:, 0], data22[:, 50])
+axs[1, 2].plot(data22[:, 0], data22[:, 40])
+axs[1, 2].plot(data22[:, 0], data22[:, 30])
+axs[1, 2].plot(data22[:, 0], data22[:, 20])
+axs[1, 2].set_title('22')
+axs[2, 0].plot(data23[:, 0], data23[:, 50])
+axs[2, 0].plot(data23[:, 0], data23[:, 40])
+axs[2, 0].plot(data23[:, 0], data23[:, 30])
+axs[2, 0].plot(data23[:, 0], data23[:, 20])
+axs[2, 0].set_title('23')
 
-plt.plot(data[:, 0], data[:, 50])
-plt.plot(data[:, 0], data[:, 40])
-plt.plot(data[:, 0], data[:, 30])
-plt.plot(data[:, 0], data[:, 20])
-plt.xlabel("x (m)")
-plt.ylabel("Mobile concentration (H/m3)")
-#plt.show()
+for ax in axs.flat:
+    ax.set(xlabel='x-label', ylabel='y-label')
+
+# Hide x labels and tick labels for top plots and y ticks for right plots.
+for ax in axs.flat:
+    ax.label_outer()
+
+# plt.plot(data[:, 0], data[:, 50])
+# plt.plot(data[:, 0], data[:, 40])
+# plt.plot(data[:, 0], data[:, 30])
+# plt.plot(data[:, 0], data[:, 20])
+# plt.xlabel("x (m)")
+# plt.ylabel("Mobile concentration (H/m3)")
+# plt.title(h)
+plt.show()
+
+# import matplotlib.pyplot as plt
+# import numpy as np
+# data = np.genfromtxt(
+#     results_folder + f'/Cm{np.log10(float(Cm))}.txt', skip_header=1, delimiter=","
+# )
+
+
+# plt.plot(data[:, 0], data[:, 50])
+# plt.plot(data[:, 0], data[:, 40])
+# plt.plot(data[:, 0], data[:, 30])
+# plt.plot(data[:, 0], data[:, 20])
+# plt.xlabel("x (m)")
+# plt.ylabel("Mobile concentration (H/m3)")
+# plt.show()
 
 ####
 # import numpy as np
