@@ -1,3 +1,4 @@
+#- instead of source term, use an initial condition term: https://festim.readthedocs.io/en/v1.2.1/userguide/initial_conditions.html#
 import festim as F
 my_model = F.Simulation()
 import numpy as np
