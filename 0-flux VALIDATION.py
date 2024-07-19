@@ -5,18 +5,14 @@ import sympy as sp
 from festim import x,y,z,t
 T_b = 975#K
 t_res = 2e6#s
+step = 50000
 r_p = 3e-2#m
 S = 1.715e17
 g_atom_density = 1.1e29
-def arrmax(A):
-    maxi = float('-inf')  # Initialize maxi as negative infinity
-    for num in A:
-        if num > maxi:
-            maxi = num
-    return maxi
+Cm = 5.61e21
 
 size = np.sqrt(3)*r_p #sqrt 3 is calculated from primitive cubic arrangement
-t = np.arange(0,t_res,t_res/10)
+t = np.arange(0,t_res,step)
 x = np.arange(0,size,size/100)
 vertices_g = np.linspace(0,r_p, num = 100)
 vertices_lipb = np.linspace(r_p,size, num = 100)
@@ -44,7 +40,7 @@ my_model.materials = F.Materials([graphite, lipb])
 
 my_model.T = F.Temperature(value=T_b)
 
-my_model.boundary_conditions = [F.FluxBC(surfaces=2, value=0, field ='0')]
+my_model.boundary_conditions = [F.DirichletBC(surfaces=2, value=Cm, field ='0')]
 
 # trap_1 = F.Trap(
 #     k_0=graphite.D_0 / (1.1e-10**2 * 6 * g_atom_density),
@@ -75,7 +71,7 @@ my_model.boundary_conditions = [F.FluxBC(surfaces=2, value=0, field ='0')]
 
 # my_model.traps = [trap_1, trap_2, trap_3]
 
-my_model.sources = [F.Source(value=S, volume=2, field=0)]
+my_model.sources = [F.Source(value=1e20, volume=2, field=0)]
 #my_model.sources = [F.InitialCondition(field='mobile', value=F.x)]
 my_model.settings = F.Settings(
     absolute_tolerance=1e10,
@@ -83,13 +79,13 @@ my_model.settings = F.Settings(
     final_time=t_res, # s
     chemical_pot=True
     )
-my_model.dt = F.Stepsize(t_res/10)  # s
+my_model.dt = F.Stepsize(step)  # s
 results_folder = "Cm measurements"
 my_model.exports = [
     F.XDMFExport(
         field="solute",
         filename=results_folder + f'/Flux.xdmf',
-        checkpoint=True  # needed in 1D
+        checkpoint=False  # needed in 1D
         ),
     F.TXTExport(field="solute", times=t.tolist(), filename=results_folder+f'/Flux.txt')
 ]
@@ -103,14 +99,9 @@ data = np.genfromtxt(
     results_folder + f'/Flux.txt', skip_header=1, delimiter=","
 )
 
-profile = data[:,0]
-p = arrmax(max(np.asarray(np.where(profile == r_p))))
-print("Cm = ", max(tuple(data[p:,len(data[0])-1])))
-
-plt.plot(data[:, 0], data[:, 9])
-plt.plot(data[:, 0], data[:, 7])
-plt.plot(data[:, 0], data[:, 5])
-plt.plot(data[:, 0], data[:, 3])
+plt.plot(data[:, 0], data[:, len(data[0])-1])
+plt.plot(data[:, 0], data[:, 21])
+plt.plot(data[:, 0], data[:, 11])
 plt.plot(data[:, 0], data[:, 1])
 plt.xlabel("x (m)")
 plt.ylabel("Mobile concentration (H/m3)")
