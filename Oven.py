@@ -56,9 +56,12 @@ coeffs = np.polyfit(ovenx, oveny, deg=3)
 oven = sum(c * F.x**i for i, c in enumerate(coeffs[::-1]))
 print("Oven function = ", oven)
 
-temp = 200 #degrees Celsius
-time = 2e6#s
-step = 50000
+def OVEN(x):
+    return sum(c * x**i for i, c in enumerate(coeffs[::-1]))
+
+temp = 70 #degrees Celsius, PARAMETER 1
+time = 2e2#s, PARAMETER 2
+step = time/20
 alpha = 0.50 #Reynolds exponent, 0.5 for laminar and 1.0 for turbulent
 gamma = 0.33 #Schmidt exponent, 0.33 for sphere
 C = 0.552
@@ -100,7 +103,7 @@ my_model.materials = F.Materials([graphite])
 
 my_model.T = F.Temperature(value=temp+273.15)
 my_model.boundary_conditions = [
-    F.FluxBC(surfaces=2, value=K*Cs*6.02e23, field='0')
+    F.MassFlux(h_coeff=K, c_ext=0, surfaces=2)
 ]
 
 
@@ -137,7 +140,7 @@ my_model.settings = F.Settings(
     absolute_tolerance=1e10,
     relative_tolerance=1e-10,
     final_time=time, # s
-    chemical_pot=False
+    chemical_pot=True
     )
 my_model.dt = F.Stepsize(step)  # s
 results_folder = "Oven data"
@@ -158,13 +161,63 @@ import numpy as np
 data = np.genfromtxt(
     results_folder + '/oven.txt', skip_header=1, delimiter=","
 )
+xdata = data[:,0]
+initialdata = data[:, 1]
+finaldata = data[:, len(data[0])-1]
+N = np.trapz(y = initialdata, x = xdata) - np.trapz(y = finaldata, x = xdata)
 
-#plt.plot(data[:, 0], data[:, len(data[0])-1])
-plt.plot(data[:, 0], data[:, 3])
-plt.plot(data[:, 0], data[:, 2])
-plt.plot(data[:, 0], data[:, 1],marker = '.')
-plt.plot(ovenx, oveny)
-plt.xlabel("x (m)")
-plt.ylabel("Mobile concentration (H/m3)")
-plt.yscale('log')
+print(N)
+####
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.animation as animation
+
+# Load the simulation results from the TXT file
+data = np.genfromtxt(results_folder + "/oven.txt", skip_header=1, delimiter=",")
+
+# Check the shape of the data to avoid index errors
+num_frames = data.shape[1] - 1  # Number of datasets excluding the first column
+
+# Set up the figure and axis
+fig, ax = plt.subplots()
+heatmap = ax.imshow(data[:, 1].reshape(1, -1), aspect = 'auto', cmap='jet', origin='lower',interpolation='nearest')
+plt.xlim(0,197)
+# Add color bar
+cbar = plt.colorbar(heatmap)
+cbar.set_label('Concentration (H/m³)')
+border1 = plt.axvline(x=1714, linewidth = 3, color='black')
+border2 = plt.axvline(x=1429, linewidth = 3, color='black')
+
+# Update function for animation
+def update(frame):
+    if frame < num_frames:
+        # Update the heatmap data with the next dataset
+        heatmap.set_array(data[:, frame + 1].reshape(1, -1))
+        return [heatmap, border1, border2]
+    
+
+
+# Create the animation
+ani = animation.FuncAnimation(fig, update, frames=num_frames, interval=500, blit=True)
+writer = animation.PillowWriter(fps=5)
+ani.save('animation.gif', writer=writer)
+
+# Display the animation
 plt.show()
+
+####
+
+# plt.plot(data[:, 0], data[:, len(data[0])-1])
+# # plt.plot(data[:, 0], data[:, 7])
+# # plt.plot(data[:, 0], data[:, 6])
+# # plt.plot(data[:, 0], data[:, 5])
+# # plt.plot(data[:, 0], data[:, 4])
+# # plt.plot(data[:, 0], data[:, 3])
+# # plt.plot(data[:, 0], data[:, 2])
+# plt.plot(data[:, 0], data[:, 1])
+# # plt.plot(ovenx, oveny)
+# # plt.plot(ovenx, OVEN(ovenx))
+# plt.xlabel("x (m)")
+# plt.ylabel("Mobile concentration (H/m3)")
+# plt.yscale('log')
+# plt.show()

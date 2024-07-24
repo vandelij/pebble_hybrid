@@ -1,0 +1,157 @@
+<?xml version="1.0"?>
+<Xdmf Version="3.0">
+  <Domain>
+    <Grid GridType="Collection" CollectionType="Temporal" Name="mobile_concentration">
+      <Grid Name="mobile_concentration_0" GridType="Uniform">
+        <Topology NumberOfElements="198" TopologyType="PolyLine" NodesPerElement="2">
+          <DataItem Dimensions="198 2" NumberType="UInt" Format="HDF">pebble25.h5:mobile_concentration/mobile_concentration_0/mesh/topology</DataItem>
+        </Topology>
+        <Geometry GeometryType="XY">
+          <DataItem Dimensions="199 2" Format="HDF">pebble25.h5:mobile_concentration/mobile_concentration_0/mesh/geometry</DataItem>
+        </Geometry>
+        <Time Value="2.160000000000000e+05" />
+        <Attribute ItemType="FiniteElementFunction" ElementFamily="DG" ElementDegree="1" ElementCell="interval" Name="mobile_concentration" Center="Other" AttributeType="Scalar">
+          <DataItem Dimensions="396 1" NumberType="UInt" Format="HDF">pebble25.h5:mobile_concentration/mobile_concentration_0/cell_dofs</DataItem>
+          <DataItem Dimensions="396 1" NumberType="Float" Format="HDF">pebble25.h5:mobile_concentration/mobile_concentration_0/vector</DataItem>
+          <DataItem Dimensions="199 1" NumberType="UInt" Format="HDF">pebble25.h5:mobile_concentration/mobile_concentration_0/x_cell_dofs</DataItem>
+          <DataItem Dimensions="198 1" NumberType="UInt" Format="HDF">pebble25.h5:mobile_concentration/mobile_concentration_0/cells</DataItem>
+        </Attribute>
+      </Grid>
+      <Grid Name="mobile_concentration_1" GridType="Uniform">
+        <Topology NumberOfElements="198" TopologyType="PolyLine" NodesPerElement="2">
+          <DataItem Dimensions="198 2" NumberType="UInt" Format="HDF">pebble25.h5:mobile_concentration/mobile_concentration_1/mesh/topology</DataItem>
+        </Topology>
+        <Geometry GeometryType="XY">
+          <DataItem Dimensions="199 2" Format="HDF">pebble25.h5:mobile_concentration/mobile_concentration_1/mesh/geometry</DataItem>
+        </Geometry>
+        <Time Value="4.320000000000000e+05" />
+        <Attribute ItemType="FiniteElementFunction" ElementFamily="DG" ElementDegree="1" ElementCell="interval" Name="mobile_concentration" Center="Other" AttributeType="Scalar">
+          <DataItem Dimensions="396 1" NumberType="UInt" Format="HDF">pebble25.h5:mobile_concentration/mobile_concentration_1/cell_dofs</DataItem>
+          <DataItem Dimensions="396 1" NumberType="Float" Format="HDF">pebble25.h5:mobile_concentration/mobile_concentration_1/vector</DataItem>
+          <DataItem Dimensions="199 1" NumberType="UInt" Format="HDF">pebble25.h5:mobile_concentration/mobile_concentration_1/x_cell_dofs</DataItem>
+          <DataItem Dimensions="198 1" NumberType="UInt" Format="HDF">pebble25.h5:mobile_concentration/mobile_concentration_1/cells</DataItem>
+        </Attribute>
+      </Grid>
+      <Grid Name="mobile_concentration_2" GridType="Uniform">
+        <Topology NumberOfElements="198" TopologyType="PolyLine" NodesPerElement="2">
+          <DataItem Dimensions="198 2" NumberType="UInt" Format="HDF">pebble25.h5:mobile_concentration/mobile_concentration_2/mesh/topology</DataItem>
+        </Topology>
+        <Geometry GeometryType="XY">
+          <DataItem Dimensions="199 2" Format="HDF">pebble25.h5:mobile_concentration/mobile_concentration_2/mesh/geometry</DataItem>
+        </Geometry>
+        <Time Value="6.480000000000000e+05" />
+        <Attribute ItemType="FiniteElementFunction" ElementFamily="DG" ElementDegree="1" ElementCell="interval" Name="mobile_concentration" Center="Other" AttributeType="Scalar">
+          <DataItem Dimensions="396 1" NumberType="UInt" Format="HDF">pebble25.h5:mobile_concentration/mobile_concentration_2/cell_dofs</DataItem>
+          <DataItem Dimensions="396 1" NumberType="Float" Format="HDF">pebble25.h5:mobile_concentration/mobile_concentration_2/vector</DataItem>
+          <DataItem Dimensions="199 1" NumberType="UInt" Format="HDF">pebble25.h5:mobile_concentration/mobile_concentration_2/x_cell_dofs</DataItem>
+          <DataItem Dimensions="198 1" NumberType="UInt" Format="HDF">pebble25.h5:mobile_concentration/mobile_concentration_2/cells</DataItem>
+        </Attribute>
+      </Grid>
+      <Grid Name="mobile_concentration_3" GridType="Uniform">
+        <Topology NumberOfElements="198" TopologyType="PolyLine" NodesPerElement="2">
+          <DataItem Dimensions="198 2" NumberType="UInt" Format="HDF">pebble25.h5:mobile_concentration/mobile_concentration_3/mesh/topology</DataItem>
+        </Topology>
+        <Geometry GeometryType="XY">
+          <DataItem Dimensions="199 2" Format="HDF">pebble25.h5:mobile_concentration/mobile_concentration_3/mesh/geometry</DataItem>
+        </Geometry>
+        <Time Value="8.640000000000000e+05" />
+        <Attribute ItemType="FiniteElementFunction" ElementFamily="DG" ElementDegree="1" ElementCell="interval" Name="mobile_concentration" Center="Other" AttributeType="Scalar">
+          <DataItem Dimensions="396 1" NumberType="UInt" Format="HDF">pebble25.h5:mobile_concentration/mobile_concentration_3/cell_dofs</DataItem>
+          <DataItem Dimensions="396 1" NumberType="Float" Format="HDF">pebble25.h5:mobile_concentration/mobile_concentration_3/vector</DataItem>
+          <DataItem Dimensions="199 1" NumberType="UInt" Format="HDF">pebble25.h5:mobile_concentration/mobile_concentration_3/x_cell_dofs</DataItem>
+          <DataItem Dimensions="198 1" NumberType="UInt" Format="HDF">pebble25.h5:mobile_concentration/mobile_concentration_3/cells</DataItem>
+        </Attribute>
+      </Grid>
+      <Grid Name="mobile_concentration_4" GridType="Uniform">
+        <Topology NumberOfElements="198" TopologyType="PolyLine" NodesPerElement="2">
+          <DataItem Dimensions="198 2" NumberType="UInt" Format="HDF">pebble25.h5:mobile_concentration/mobile_concentration_4/mesh/topology</DataItem>
+        </Topology>
+        <Geometry GeometryType="XY">
+          <DataItem Dimensions="199 2" Format="HDF">pebble25.h5:mobile_concentration/mobile_concentration_4/mesh/geometry</DataItem>
+        </Geometry>
+        <Time Value="1.080000000000000e+06" />
+        <Attribute ItemType="FiniteElementFunction" ElementFamily="DG" ElementDegree="1" ElementCell="interval" Name="mobile_concentration" Center="Other" AttributeType="Scalar">
+          <DataItem Dimensions="396 1" NumberType="UInt" Format="HDF">pebble25.h5:mobile_concentration/mobile_concentration_4/cell_dofs</DataItem>
+          <DataItem Dimensions="396 1" NumberType="Float" Format="HDF">pebble25.h5:mobile_concentration/mobile_concentration_4/vector</DataItem>
+          <DataItem Dimensions="199 1" NumberType="UInt" Format="HDF">pebble25.h5:mobile_concentration/mobile_concentration_4/x_cell_dofs</DataItem>
+          <DataItem Dimensions="198 1" NumberType="UInt" Format="HDF">pebble25.h5:mobile_concentration/mobile_concentration_4/cells</DataItem>
+        </Attribute>
+      </Grid>
+      <Grid Name="mobile_concentration_5" GridType="Uniform">
+        <Topology NumberOfElements="198" TopologyType="PolyLine" NodesPerElement="2">
+          <DataItem Dimensions="198 2" NumberType="UInt" Format="HDF">pebble25.h5:mobile_concentration/mobile_concentration_5/mesh/topology</DataItem>
+        </Topology>
+        <Geometry GeometryType="XY">
+          <DataItem Dimensions="199 2" Format="HDF">pebble25.h5:mobile_concentration/mobile_concentration_5/mesh/geometry</DataItem>
+        </Geometry>
+        <Time Value="1.296000000000000e+06" />
+        <Attribute ItemType="FiniteElementFunction" ElementFamily="DG" ElementDegree="1" ElementCell="interval" Name="mobile_concentration" Center="Other" AttributeType="Scalar">
+          <DataItem Dimensions="396 1" NumberType="UInt" Format="HDF">pebble25.h5:mobile_concentration/mobile_concentration_5/cell_dofs</DataItem>
+          <DataItem Dimensions="396 1" NumberType="Float" Format="HDF">pebble25.h5:mobile_concentration/mobile_concentration_5/vector</DataItem>
+          <DataItem Dimensions="199 1" NumberType="UInt" Format="HDF">pebble25.h5:mobile_concentration/mobile_concentration_5/x_cell_dofs</DataItem>
+          <DataItem Dimensions="198 1" NumberType="UInt" Format="HDF">pebble25.h5:mobile_concentration/mobile_concentration_5/cells</DataItem>
+        </Attribute>
+      </Grid>
+      <Grid Name="mobile_concentration_6" GridType="Uniform">
+        <Topology NumberOfElements="198" TopologyType="PolyLine" NodesPerElement="2">
+          <DataItem Dimensions="198 2" NumberType="UInt" Format="HDF">pebble25.h5:mobile_concentration/mobile_concentration_6/mesh/topology</DataItem>
+        </Topology>
+        <Geometry GeometryType="XY">
+          <DataItem Dimensions="199 2" Format="HDF">pebble25.h5:mobile_concentration/mobile_concentration_6/mesh/geometry</DataItem>
+        </Geometry>
+        <Time Value="1.512000000000000e+06" />
+        <Attribute ItemType="FiniteElementFunction" ElementFamily="DG" ElementDegree="1" ElementCell="interval" Name="mobile_concentration" Center="Other" AttributeType="Scalar">
+          <DataItem Dimensions="396 1" NumberType="UInt" Format="HDF">pebble25.h5:mobile_concentration/mobile_concentration_6/cell_dofs</DataItem>
+          <DataItem Dimensions="396 1" NumberType="Float" Format="HDF">pebble25.h5:mobile_concentration/mobile_concentration_6/vector</DataItem>
+          <DataItem Dimensions="199 1" NumberType="UInt" Format="HDF">pebble25.h5:mobile_concentration/mobile_concentration_6/x_cell_dofs</DataItem>
+          <DataItem Dimensions="198 1" NumberType="UInt" Format="HDF">pebble25.h5:mobile_concentration/mobile_concentration_6/cells</DataItem>
+        </Attribute>
+      </Grid>
+      <Grid Name="mobile_concentration_7" GridType="Uniform">
+        <Topology NumberOfElements="198" TopologyType="PolyLine" NodesPerElement="2">
+          <DataItem Dimensions="198 2" NumberType="UInt" Format="HDF">pebble25.h5:mobile_concentration/mobile_concentration_7/mesh/topology</DataItem>
+        </Topology>
+        <Geometry GeometryType="XY">
+          <DataItem Dimensions="199 2" Format="HDF">pebble25.h5:mobile_concentration/mobile_concentration_7/mesh/geometry</DataItem>
+        </Geometry>
+        <Time Value="1.728000000000000e+06" />
+        <Attribute ItemType="FiniteElementFunction" ElementFamily="DG" ElementDegree="1" ElementCell="interval" Name="mobile_concentration" Center="Other" AttributeType="Scalar">
+          <DataItem Dimensions="396 1" NumberType="UInt" Format="HDF">pebble25.h5:mobile_concentration/mobile_concentration_7/cell_dofs</DataItem>
+          <DataItem Dimensions="396 1" NumberType="Float" Format="HDF">pebble25.h5:mobile_concentration/mobile_concentration_7/vector</DataItem>
+          <DataItem Dimensions="199 1" NumberType="UInt" Format="HDF">pebble25.h5:mobile_concentration/mobile_concentration_7/x_cell_dofs</DataItem>
+          <DataItem Dimensions="198 1" NumberType="UInt" Format="HDF">pebble25.h5:mobile_concentration/mobile_concentration_7/cells</DataItem>
+        </Attribute>
+      </Grid>
+      <Grid Name="mobile_concentration_8" GridType="Uniform">
+        <Topology NumberOfElements="198" TopologyType="PolyLine" NodesPerElement="2">
+          <DataItem Dimensions="198 2" NumberType="UInt" Format="HDF">pebble25.h5:mobile_concentration/mobile_concentration_8/mesh/topology</DataItem>
+        </Topology>
+        <Geometry GeometryType="XY">
+          <DataItem Dimensions="199 2" Format="HDF">pebble25.h5:mobile_concentration/mobile_concentration_8/mesh/geometry</DataItem>
+        </Geometry>
+        <Time Value="1.944000000000000e+06" />
+        <Attribute ItemType="FiniteElementFunction" ElementFamily="DG" ElementDegree="1" ElementCell="interval" Name="mobile_concentration" Center="Other" AttributeType="Scalar">
+          <DataItem Dimensions="396 1" NumberType="UInt" Format="HDF">pebble25.h5:mobile_concentration/mobile_concentration_8/cell_dofs</DataItem>
+          <DataItem Dimensions="396 1" NumberType="Float" Format="HDF">pebble25.h5:mobile_concentration/mobile_concentration_8/vector</DataItem>
+          <DataItem Dimensions="199 1" NumberType="UInt" Format="HDF">pebble25.h5:mobile_concentration/mobile_concentration_8/x_cell_dofs</DataItem>
+          <DataItem Dimensions="198 1" NumberType="UInt" Format="HDF">pebble25.h5:mobile_concentration/mobile_concentration_8/cells</DataItem>
+        </Attribute>
+      </Grid>
+      <Grid Name="mobile_concentration_9" GridType="Uniform">
+        <Topology NumberOfElements="198" TopologyType="PolyLine" NodesPerElement="2">
+          <DataItem Dimensions="198 2" NumberType="UInt" Format="HDF">pebble25.h5:mobile_concentration/mobile_concentration_9/mesh/topology</DataItem>
+        </Topology>
+        <Geometry GeometryType="XY">
+          <DataItem Dimensions="199 2" Format="HDF">pebble25.h5:mobile_concentration/mobile_concentration_9/mesh/geometry</DataItem>
+        </Geometry>
+        <Time Value="2.160000000000000e+06" />
+        <Attribute ItemType="FiniteElementFunction" ElementFamily="DG" ElementDegree="1" ElementCell="interval" Name="mobile_concentration" Center="Other" AttributeType="Scalar">
+          <DataItem Dimensions="396 1" NumberType="UInt" Format="HDF">pebble25.h5:mobile_concentration/mobile_concentration_9/cell_dofs</DataItem>
+          <DataItem Dimensions="396 1" NumberType="Float" Format="HDF">pebble25.h5:mobile_concentration/mobile_concentration_9/vector</DataItem>
+          <DataItem Dimensions="199 1" NumberType="UInt" Format="HDF">pebble25.h5:mobile_concentration/mobile_concentration_9/x_cell_dofs</DataItem>
+          <DataItem Dimensions="198 1" NumberType="UInt" Format="HDF">pebble25.h5:mobile_concentration/mobile_concentration_9/cells</DataItem>
+        </Attribute>
+      </Grid>
+    </Grid>
+  </Domain>
+</Xdmf>
